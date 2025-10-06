@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmoEduTech - Blog de Tecnología Educativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de colores y estilos */
+        :root {
+            --deep-space: #0a0e29;
+            --cosmic-purple: #2a0a45;
+            --stardust: #f5f5f5;
+            --nebula-blue: #4a36d6;
+            --tech-cyan: #00f5ff;
+            --planet-orange: #ff7b25;
+            --galaxy-pink: #d336c2;
+        }
+
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--deep-space);
+            color: var(--stardust);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(74, 54, 214, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(211, 54, 194, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 123, 37, 0.05) 0%, transparent 50%);
+        }
+
+        /* Estrellas de fondo */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Encabezado */
+        header {
+            background: linear-gradient(135deg, var(--cosmic-purple), var(--deep-space));
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(74, 54, 214, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(211, 54, 194, 0.2) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--tech-cyan);
+            text-shadow: 0 0 10px var(--tech-cyan);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--tech-cyan), var(--galaxy-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--stardust);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, text-shadow 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--tech-cyan);
+            text-shadow: 0 0 8px var(--tech-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--tech-cyan);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--tech-cyan), var(--planet-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--nebula-blue), var(--galaxy-pink));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(74, 54, 214, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 54, 214, 0.6);
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            height: 400px;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--planet-orange), #b35000);
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 
+                0 0 60px rgba(255, 123, 37, 0.5),
+                inset -20px -20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .orbit-1 {
+            width: 300px;
+            height: 300px;
+        }
+
+        .orbit-2 {
+            width: 400px;
+            height: 400px;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+
+        .satellite {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--tech-cyan);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px var(--tech-cyan);
+        }
+
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Sección destacada: ¿Qué es la tecnología educativa? */
+        .featured-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(74, 54, 214, 0.1), rgba(211, 54, 194, 0.1));
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(74, 54, 214, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(211, 54, 194, 0.2) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, var(--tech-cyan), var(--planet-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .featured-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, var(--nebula-blue), var(--galaxy-pink));
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0, 245, 255, 0.2) 0%, transparent 50%);
+        }
+
+        /* Sección de artículos */
+        .articles-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--nebula-blue), var(--galaxy-pink));
+            border-radius: 3px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: linear-gradient(145deg, rgba(42, 14, 69, 0.7), rgba(10, 14, 41, 0.7));
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(74, 54, 214, 0.2);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .article-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--nebula-blue), var(--galaxy-pink));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0, 245, 255, 0.2) 0%, transparent 50%);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 245, 255, 0.2);
+            color: var(--tech-cyan);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--stardust);
+        }
+
+        .article-excerpt {
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(245, 245, 245, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Sección de suscripción */
+        .newsletter {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(74, 54, 214, 0.1), rgba(211, 54, 194, 0.1));
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(74, 54, 214, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(211, 54, 194, 0.2) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--tech-cyan), var(--planet-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        .subscribe-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            background: rgba(10, 14, 41, 0.7);
+            color: var(--stardust);
+            outline: none;
+            border: 1px solid rgba(74, 54, 214, 0.3);
+        }
+
+        .subscribe-form input:focus {
+            border-color: var(--tech-cyan);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        }
+
+        .subscribe-form button {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--nebula-blue), var(--galaxy-pink));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .subscribe-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 54, 214, 0.4);
+        }
+
+        /* Pie de página */
+        footer {
+            background: linear-gradient(to top, var(--cosmic-purple), var(--deep-space));
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--tech-cyan);
+            position: relative;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--tech-cyan);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(245, 245, 245, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--tech-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            color: var(--tech-cyan);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-icon:hover {
+            background: rgba(0, 245, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(74, 54, 214, 0.3);
+            color: rgba(245, 245, 245, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-visual {
+                width: 100%;
+            }
+
+            .subscribe-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo de estrellas -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <h1>CosmoEduTech</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#articulos">Artículos</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Explorando el Futuro de la Educación con Tecnología</h2>
+            <p>Descubre las últimas tendencias en tecnología educativa, herramientas innovadoras y estrategias para transformar el aprendizaje en una experiencia cósmica.</p>
+            <a href="#articulos" class="cta-button">Explorar Artículos</a>
+        </div>
+        <div class="hero-visual">
+            <div class="planet"></div>
+            <div class="orbit orbit-1">
+                <div class="satellite"></div>
+            </div>
+            <div class="orbit orbit-2">
+                <div class="satellite"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Destacada: ¿Qué es la tecnología educativa? -->
+    <section class="featured-section">
+        <div class="featured-content">
+            <h2 class="featured-title">¿Qué es la Tecnología Educativa?</h2>
+            <p class="featured-text">
+                La tecnología educativa es el uso de herramientas tecnológicas digitales y electrónicas para facilitar, mejorar y gestionar los procesos de enseñanza-aprendizaje.
+            </p>
+            <p class="featured-text">
+                No se trata solo de la utilización de computadoras y software en el aula, sino de una integración pedagógica que busca aprovechar las ventajas de la tecnología para crear entornos más eficientes, interactivos y personalizados.
+            </p>
+            <div class="featured-image"></div>
+            <p class="featured-text">
+                La tecnología educativa abarca desde plataformas de aprendizaje en línea y aplicaciones educativas hasta realidad aumentada, inteligencia artificial y análisis de datos para personalizar la experiencia de aprendizaje según las necesidades de cada estudiante.
+            </p>
+        </div>
+    </section>
+
+    <!-- Sección de Artículos -->
+    <section class="articles-section" id="articulos">
+        <h2 class="section-title">Artículos Recientes</h2>
+        <div class="articles-grid">
+            <!-- Artículo 1 -->
+            <article class="article-card">
+                <div class="article-image"></div>
+                <div class="article-content">
+                    <span class="article-tag">Realidad Aumentada</span>
+                    <h3 class="article-title">Cómo la RA está transformando las aulas del futuro</h3>
+                    <p class="article-excerpt">Exploramos las aplicaciones prácticas de la realidad aumentada en educación y cómo está revolucionando la forma en que los estudiantes interactúan con el contenido.</p>
+                    <div class="article-meta">
+                        <span>15 Septiembre, 2025</span>
+                        <span>8 min lectura</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artículo 2 -->
+            <article class="article-card">
+                <div class="article-image"></div>
+                <div class="article-content">
+                    <span class="article-tag">Inteligencia Artificial</span>
+                    <h3 class="article-title">Asistentes de IA personalizados para cada estudiante</h3>
+                    <p class="article-excerpt">Descubre cómo los sistemas de IA están creando experiencias de aprendizaje personalizadas que se adaptan al ritmo y estilo de cada estudiante.</p>
+                    <div class="article-meta">
+                        <span>10 Septiembre, 2025</span>
+                        <span>12 min lectura</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artículo 3 -->
+            <article class="article-card">
+                <div class="article-image"></div>
+                <div class="article-content">
+                    <span class="article-tag">Gamificación</span>
+                    <h3 class="article-title">Aprendizaje basado en juegos: más allá de los puntos</h3>
+                    <p class="article-excerpt">Analizamos estrategias efectivas de gamificación que van más allá de simples sistemas de puntos para crear experiencias educativas inmersivas.</p>
+                    <div class="article-meta">
+                        <span>5 Septiembre, 2025</span>
+                        <span>10 min lectura</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artículo 4 -->
+            <article class="article-card">
+                <div class="article-image"></div>
+                <div class="article-content">
+                    <span class="article-tag">Plataformas LMS</span>
+                    <h3 class="article-title">Comparativa de las mejores plataformas de aprendizaje en línea</h3>
+                    <p class="article-excerpt">Evaluamos las principales plataformas LMS disponibles en el mercado y sus características para diferentes necesidades educativas.</p>
+                    <div class="article-meta">
+                        <span>28 Agosto, 2025</span>
+                        <span>15 min lectura</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artículo 5 -->
+            <article class="article-card">
+                <div class="article-image"></div>
+                <div class="article-content">
+                    <span class="article-tag">Analíticas de Aprendizaje</span>
+                    <h3 class="article-title">Cómo utilizar datos para mejorar los resultados educativos</h3>
+                    <p class="article-excerpt">Aprende a implementar sistemas de análisis de datos para identificar patrones de aprendizaje y personalizar la enseñanza.</p>
+                    <div class="article-meta">
+                        <span>20 Agosto, 2025</span>
+                        <span>11 min lectura</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artículo 6 -->
+            <article class="article-card">
+                <div class="article-image"></div>
+                <div class="article-content">
+                    <span class="article-tag">Realidad Virtual</span>
+                    <h3 class="article-title">Inmersión educativa: el potencial de la RV en el aula</h3>
+                    <p class="article-excerpt">Exploramos casos de éxito en el uso de realidad virtual para crear experiencias educativas inmersivas y memorables.</p>
+                    <div class="article-meta">
+                        <span>15 Agosto, 2025</span>
+                        <span>9 min lectura</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Sección de Suscripción -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h3>Únete a Nuestra Comunidad</h3>
+            <p>Suscríbete para recibir las últimas noticias sobre tecnología educativa, recursos exclusivos y actualizaciones directamente en tu bandeja de entrada.</p>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>CosmoEduTech</h4>
+                <p>Explorando las fronteras de la tecnología educativa para crear experiencias de aprendizaje transformadoras.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/toniddl12/" class="social-icon" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#articulos">Artículos</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Categorías</h4>
+                <ul>
+                    <li><a href="#">Realidad Aumentada</a></li>
+                    <li><a href="#">Inteligencia Artificial</a></li>
+                    <li><a href="#">Gamificación</a></li>
+                    <li><a href="#">Plataformas LMS</a></li>
+                    <li><a href="#">Analíticas de Aprendizaje</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@cosmoedutech.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>656 868 8170</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Galaxia Educativa, Vía Láctea</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 CosmoEduTech. Todos los derechos reservados. | Actualizado el 06/10/2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // Crear estrellas de fondo
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Posición aleatoria
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3;
+                
+                // Animación con retraso aleatorio
+                const delay = Math.random() * 5;
+                
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Inicializar cuando se carga la página
+        window.addEventListener('DOMContentLoaded', createStars);
+    </script>
+</body>
+</html>
